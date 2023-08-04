@@ -3,12 +3,12 @@
     "start": "platformatic start"
   },
   "devDependencies": {
-    "fastify": "^4.19.2"
+    "fastify": "^4.21.0"
   },
   "dependencies": {
-    "platformatic": "^0.30.1"
+    "platformatic": "^0.33.1"
   },
   "engines": {
-    "node": "^18.8.0 || >=19"
+    "node": "^18.8.0"
   }
 }

@@ -1,30 +1,33 @@
-CREATE TABLE pet_stuff (
-    id INTEGER PRIMARY KEY,
-    item_name TEXT NOT NULL,
-    item_description TEXT,
-    item_price REAL NOT NULL
+CREATE TABLE customers (
+    customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    address VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    zip_code VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE tracking_info (
-    id INTEGER PRIMARY KEY,
-    pet_stuff_id INTEGER NOT NULL,
-    tracking_number TEXT NOT NULL,
-    FOREIGN KEY (pet_stuff_id) REFERENCES pet_stuff(id)
+CREATE TABLE products (
+    product_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_name VARCHAR(50) NOT NULL,
+    product_description VARCHAR(50) NOT NULL,
+    product_price DECIMAL(10,2) NOT NULL
 );
 
 CREATE TABLE orders (
-    id INTEGER PRIMARY KEY,
-    pet_stuff_id INTEGER NOT NULL,
-    customer_name TEXT NOT NULL,
+    order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER NOT NULL,
     order_date DATE NOT NULL,
-    FOREIGN KEY (pet_stuff_id) REFERENCES pet_stuff(id)
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
 );
 
-CREATE TABLE logistics (
-    id INTEGER PRIMARY KEY,
+CREATE TABLE order_items (
+    order_item_id INTEGER PRIMARY KEY AUTOINCREMENT,
     order_id INTEGER NOT NULL,
-    tracking_info_id INTEGER NOT NULL,
-    delivery_date DATE NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(id),
-    FOREIGN KEY (tracking_info_id) REFERENCES tracking_info(id)
+    product_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
